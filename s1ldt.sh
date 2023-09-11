@@ -188,7 +188,7 @@ if [[ "$SUPPORTED_OS" = true ]]; then
             fi
             ;;
         aarch64)
-            echo "ARM64 architecture detected. Replace this line with ARM64 installation steps."
+            echo "ARM64 architecture detected. Unsupported architecture: $ARCH"
             ;;
         *)
             echo "Unsupported architecture: $ARCH"
