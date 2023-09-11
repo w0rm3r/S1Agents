@@ -199,9 +199,9 @@ fi
 
 # Run sentinelctl commands
 sudo /opt/sentinelone/bin/sentinelctl management token set "$TOKEN"
-sudo /opt/sentinelone/bin/sentinelctl control start
-sudo /opt/sentinelone/bin/sentinelctl control status
-sudo /opt/sentinelone/bin/sentinelctl version
+sudo /opt/sentinelone/bin/sentinelctl control start 2>>"$LOG_FILE" | tee -a "$LOG_FILE"
+sudo /opt/sentinelone/bin/sentinelctl control status 2>>"$LOG_FILE" | tee -a "$LOG_FILE"
+sudo /opt/sentinelone/bin/sentinelctl version 2>>"$LOG_FILE" | tee -a "$LOG_FILE"
 
 # Check agent status and connectivity
 agent_status=$(sudo /opt/sentinelone/bin/sentinelctl control status | grep -o "Agent state: Enabled")
@@ -236,12 +236,6 @@ if [ "$agent_status" == "Agent state: Enabled" ]; then
 else
     log_message ""
 fi
-
-# Display SentinelOne Agent details
-echo ""
-log_message "Here are the SentinelOne Agent details:"
-sudo /opt/sentinelone/bin/sentinelctl version 2>>"$LOG_FILE" | tee -a "$LOG_FILE"
-sudo /opt/sentinelone/bin/sentinelctl control status 2>>"$LOG_FILE" | tee -a "$LOG_FILE"
 
 # Calculate and display script execution time
 execution_time=$SECONDS
